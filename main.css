@@ -33,16 +33,43 @@ body {
 #book-div {
     width: 200px;
     height: 300px;
-    background-color: yellow;
+    background-color: #092735;
 }
 #controls {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     width: 300px;
+    padding: 40px;
     background-color: #04141a;
 }
-#controls #add-book {
+#input-title,
+#input-author,
+#input-pages {
+    width: 200px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 0px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 20px;
+    color: #e7eaec;
+    background-color: #0b3142;
+}
+#input-read-label {
+    width: 200px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #e7eaec;
+    background-color: #0b3142;
+}
+#input-read {
+    margin-left: 130px;
+    transform: scale(1.5);
+}
+#add-book {
     width: 200px;
     height: 60px;
     margin: 40px auto;
@@ -52,6 +79,6 @@ body {
     color: #e7eaec;
     background-color: #08222e;
 }
-#controls #add-book:hover {
+#add-book:hover {
     background-color: #092735;
 }
