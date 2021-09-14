@@ -15,13 +15,15 @@
             
         </div>
         <div id=controls>
-            <input id=input-title type="text" placeholder="Title">
-            <input id=input-author type="text" placeholder="Author">
-            <input id=input-pages type="number" min="0" placeholder="Pages">
-            <span id=input-read-label>Read
-                <input id=input-read type="checkbox">
-            </span>
-            <button id=add-book>Add Book</button>
+            <form id="input-form" onsubmit="submitForm(); return false" autocomplete="off">
+                <input id=input-title type="text" placeholder="Title" required>
+                <input id=input-author type="text" placeholder="Author" required>
+                <input id=input-pages type="number" min="0" max="999999" placeholder="Pages" required>
+                <label id=input-read-label for="input-read">Read
+                    <input id=input-read type="checkbox">
+                </label>
+                <button id=button-add>Add Book</button>
+            </form>
         </div>
     </div> 
 </body>
