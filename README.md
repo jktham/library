@@ -1,2 +1,1 @@
-# library
-Odin project: Library
+[Live Demo](https://jktham.github.io/library/)
