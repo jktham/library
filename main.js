@@ -9,6 +9,7 @@ const deleteLibraryButton = document.querySelector("#delete-library");
 
 let bookCardArr = [];
 let bookDeleteArr = [];
+let bookEditArr = [];
 let library = [];
 
 inputForm.addEventListener("submit", () => {
@@ -57,25 +58,36 @@ function updateShelf(lib) {
         let bookLabel = document.createElement("div");
         bookLabel.textContent = i;
         bookLabel.classList.add("book-label");
+        
         let bookCard = document.createElement("div");
         bookCard.classList.add("book-card");
         bookCard.dataset.index = i;
+
         let bookTitle = document.createElement("span");
         bookTitle.textContent = book.title;
         bookTitle.classList.add("book-title");
+
         let bookAuthor = document.createElement("span");
         bookAuthor.textContent = book.author;
         bookAuthor.classList.add("book-author");
+
         let bookPages = document.createElement("span");
         bookPages.textContent = book.pages + " pages";
         bookPages.classList.add("book-pages");
+
         let bookRead = document.createElement("span");
         bookRead.textContent = book.read ? "Read" : "Not Read";
         bookRead.classList.add("book-read");
+
         let bookDelete = document.createElement("button");
         bookDelete.textContent = "X";
         bookDelete.classList.add("book-delete");
         bookDelete.dataset.index = i;
+
+        let bookEdit = document.createElement("button");
+        bookEdit.textContent = "E";
+        bookEdit.classList.add("book-edit");
+        bookEdit.dataset.index = i;
 
         shelf.appendChild(bookCard);
         bookCard.appendChild(bookLabel);
@@ -84,17 +96,21 @@ function updateShelf(lib) {
         bookCard.appendChild(bookPages);
         bookCard.appendChild(bookRead);
         bookCard.appendChild(bookDelete);
+        bookCard.appendChild(bookEdit);
     }
 
     bookCardArr = Array.from(document.querySelectorAll(".book-card"));
     bookDeleteArr = Array.from(document.querySelectorAll(".book-delete"));
+    bookEditArr = Array.from(document.querySelectorAll(".book-edit"));
     
     for (let i=0; i<bookCardArr.length; i++) {
         bookCardArr[i].addEventListener("mouseover", () => {
-            bookDeleteArr[i].style.visibility = "visible";
+            bookDeleteArr[i].style.opacity = "1";
+            bookEditArr[i].style.opacity = "1";
         });
         bookCardArr[i].addEventListener("mouseleave", () => {
-            bookDeleteArr[i].style.visibility = "hidden";
+            bookDeleteArr[i].style.opacity = "0";
+            bookEditArr[i].style.opacity = "0";
         });
         bookDeleteArr[i].addEventListener("click", () => {
             library.splice(i, 1);

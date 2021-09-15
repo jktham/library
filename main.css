@@ -1,7 +1,21 @@
+:root {
+    --nav-bg: #030f14;
+    --shelf-bg: #061921;
+    --card-bg: #092735;
+    --side-bg: #04141a;
+    --form-bg: #061921;
+    --form-input: #0b3142;
+    --button: #092735;
+    --button-hover: #08222e;
+    --delete: #581919;
+    --delete-hover: #471616;
+    --edit: #234655;
+    --edit-hover: #163442;
+    --text: #e7eaec;
+}
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
-
 body {
     margin: 0px;
 }
@@ -10,13 +24,13 @@ body {
     display: flex;
     align-items: center;
     height: 100px;
-    background-color: #030f14;
+    background-color: var(--nav-bg);
 }
 #nav-title {
     margin: 0px 50px;
     font-size: 36px;
     font-weight: bold;
-    color: #e7eaec;
+    color: var(--text);
 }
 
 #main {
@@ -32,7 +46,7 @@ body {
     flex: 1;
     gap: 40px;
     padding: 40px;
-    background-color: #061921;
+    background-color: var(--shelf-bg);
 }
 .book-card {
     display: flex;
@@ -45,37 +59,37 @@ body {
     height: 300px;
     padding: 20px 20px 20px 20px;
     border-radius: 6px;
-    background-color: #092735;
+    background-color: var(--card-bg);
 }
 .book-label {
     margin-top: -10px;
     margin-bottom: 10px;
     font-size: 16px;
-    color: #e7eaec;
+    color: var(--text);
 }
 .book-title {
     width: 180px;
     margin-bottom: 20px;
     font-size: 26px;
     font-weight: bold;
-    color: #e7eaec;
+    color: var(--text);
 }
 .book-author {
     width: 180px;
     margin-bottom: auto;
     font-size: 20px;
-    color: #e7eaec;
+    color: var(--text);
 }
 .book-pages {
     width: 180px;
     margin-bottom: 10px;
     font-size: 20px;
-    color: #e7eaec;
+    color: var(--text);
 }
 .book-read {
     width: 180px;
     font-size: 20px;
-    color: #e7eaec;
+    color: var(--text);
 }
 .book-delete {
     position: absolute;
@@ -85,21 +99,38 @@ body {
     border: 0px;
     border-radius: 10px;
     font-size: 20px;
-    color: #e7eaec;
-    background-color: #5f1616;
-    visibility: hidden;
+    color: var(--text);
+    background-color: var(--delete);
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
 }
 .book-delete:hover {
-    background-color: #771c1c;
+    background-color: var(--delete-hover);
+}
+.book-edit {
+    position: absolute;
+    transform: translate(-110px, -30px);
+    width: 45px;
+    height: 45px;
+    border: 0px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: var(--text);
+    background-color: var(--edit);
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+.book-edit:hover {
+    background-color: var(--edit-hover);
 }
 
-#controls {
+#side-bar {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding: 35px;
-    background-color: #04141a;
+    background-color: var(--side-bg);
 }
 #input-form {
     display: flex;
@@ -108,7 +139,7 @@ body {
     align-items: center;
     padding: 30px;
     border-radius: 5px;
-    background-color: #061921;
+    background-color: var(--form-bg);
 }
 #input-title,
 #input-author,
@@ -120,16 +151,16 @@ body {
     border-radius: 4px;
     outline: none;
     font-size: 20px;
-    color: #e7eaec;
-    background-color: #0b3142;
+    color: var(--text);
+    background-color: var(--form-input)
 }
 #input-read-label {
     width: 200px;
     padding: 10px;
     border-radius: 4px;
     font-size: 20px;
-    color: #e7eaec;
-    background-color: #0b3142;
+    color: var(--text);
+    background-color: var(--form-input);
 }
 #input-read {
     margin-left: 130px;
@@ -142,11 +173,11 @@ body {
     font-size: 24px;
     border: 0px;
     border-radius: 5px;
-    color: #e7eaec;
-    background-color: #08222e;
+    color: var(--text);
+    background-color: var(--button);
 }
 #input-submit:hover {
-    background-color: #092735;
+    background-color: var(--button-hover);
 }
 #random-book {
     width: 200px;
@@ -155,11 +186,11 @@ body {
     font-size: 18px;
     border: 0px;
     border-radius: 5px;
-    color: #e7eaec;
-    background-color: #08222e;
+    color: var(--text);
+    background-color: var(--button);
 }
 #random-book:hover {
-    background-color: #092735;
+    background-color: var(--button-hover);
 }
 #delete-library {
     width: 200px;
@@ -168,9 +199,9 @@ body {
     font-size: 18px;
     border: 0px;
     border-radius: 5px;
-    color: #e7eaec;
-    background-color: #5f1616;
+    color: var(--text);
+    background-color: var(--delete);
 }
 #delete-library:hover {
-    background-color: #771c1c;
+    background-color: var(--delete-hover);
 }
