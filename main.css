@@ -34,7 +34,7 @@ body {
     padding: 40px;
     background-color: #061921;
 }
-#book-card {
+.book-card {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -43,33 +43,54 @@ body {
     overflow-wrap: break-word;
     width: 200px;
     height: 300px;
-    padding: 20px;
+    padding: 20px 20px 20px 20px;
     border-radius: 6px;
     background-color: #092735;
 }
-#book-title {
+.book-label {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #e7eaec;
+}
+.book-title {
     width: 180px;
     margin-bottom: 20px;
     font-size: 26px;
     font-weight: bold;
     color: #e7eaec;
 }
-#book-author {
+.book-author {
     width: 180px;
     margin-bottom: auto;
     font-size: 20px;
     color: #e7eaec;
 }
-#book-pages {
+.book-pages {
     width: 180px;
     margin-bottom: 10px;
     font-size: 20px;
     color: #e7eaec;
 }
-#book-read {
+.book-read {
     width: 180px;
     font-size: 20px;
     color: #e7eaec;
+}
+.book-delete {
+    position: absolute;
+    transform: translate(110px, -30px);
+    width: 45px;
+    height: 45px;
+    border: 0px;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #e7eaec;
+    background-color: #5f1616;
+    visibility: hidden;
+}
+.book-delete:hover {
+    background-color: #771c1c;
 }
 
 #controls {
