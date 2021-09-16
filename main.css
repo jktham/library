@@ -87,6 +87,7 @@ body {
 .book-card {
     position: relative;
     display: flex;
+    flex: 0 0 auto;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;

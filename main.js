@@ -169,8 +169,9 @@ function getStorage(lib) {
     for (let i=0; i<localStorage.length; i++) {
         if (localStorage[i]) {
             lib[i] = JSON.parse(localStorage.getItem(i));
+            Object.setPrototypeOf(lib[i], Book.prototype);
         } else {
-            console.log("invalid localstorage");
+            alert("invalid localstorage");
             updateShelf(library = []);
         }
     }
