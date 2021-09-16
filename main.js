@@ -94,12 +94,10 @@ function addCards(lib) {
         let bookDelete = document.createElement("button");
         bookDelete.textContent = "✕";
         bookDelete.classList.add("book-delete");
-        bookDelete.dataset.index = i;
 
         let bookToggle = document.createElement("button");
         bookToggle.textContent = "🗏";
         bookToggle.classList.add("book-toggle");
-        bookToggle.dataset.index = i;
 
         shelf.appendChild(bookCard);
         bookCard.appendChild(bookLabel);
@@ -136,25 +134,25 @@ function addCards(lib) {
 }
 
 function addInfo(lib) {
+    let totalBooksRead = 0;
     let totalPages = 0;
     let totalPagesRead = 0;
-    let totalBooksRead = 0;
 
     for (let i=0; i<library.length; i++) {
+        totalBooksRead += lib[i].read;
         totalPages += lib[i].pages;
         totalPagesRead += lib[i].pages * lib[i].read;
-        totalBooksRead += lib[i].read;
     }
-
-    let infoPages = document.createElement("span");
-    infoPages.textContent = `Pages: ${totalPagesRead} / ${totalPages}`;
-    infoPages.id = "info-pages";
-    navInfo.appendChild(infoPages);
 
     let infoBooks = document.createElement("span");
     infoBooks.textContent = `Books: ${totalBooksRead} / ${lib.length}`;
     infoBooks.id = "info-books";
     navInfo.appendChild(infoBooks);
+
+    let infoPages = document.createElement("span");
+    infoPages.textContent = `Pages: ${totalPagesRead} / ${totalPages}`;
+    infoPages.id = "info-pages";
+    navInfo.appendChild(infoPages);
 }
 
 function setStorage(lib) {
