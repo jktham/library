@@ -1,3 +1,4 @@
+const navInfo = document.querySelector("#nav-info");
 const shelf = document.querySelector("#shelf");
 const titleInput = document.querySelector("#input-title");
 const authorInput = document.querySelector("#input-author");
@@ -9,12 +10,14 @@ const deleteLibraryButton = document.querySelector("#delete-library");
 
 let bookCardArr = [];
 let bookDeleteArr = [];
-let bookEditArr = [];
+let bookToggleArr = [];
 let library = [];
+
+updateShelf(library);
 
 inputForm.addEventListener("submit", () => {
     if (inputForm.checkValidity()) {
-        addBook(titleInput.value, authorInput.value, pagesInput.value, readInput.checked);
+        addBook(titleInput.value, authorInput.value, parseInt(pagesInput.value), readInput.checked);
         updateShelf(library);
         inputForm.reset();
     }
@@ -37,12 +40,15 @@ deleteLibraryButton.addEventListener("click", () => {
     updateShelf(library);
 });
 
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+}
+
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
 }
 
 function addBook(title, author, pages, read) {
@@ -52,9 +58,14 @@ function addBook(title, author, pages, read) {
 
 function updateShelf(lib) {
     shelf.innerHTML = "";
-    for (let i=0; i<lib.length; i++) {
-        let book = lib[i];
-        
+    navInfo.innerHTML = "";
+
+    addCards(lib);
+    addInfo(lib);
+}
+
+function addCards(lib) {
+    for (let i=0; i<lib.length; i++) {        
         let bookLabel = document.createElement("div");
         bookLabel.textContent = i;
         bookLabel.classList.add("book-label");
@@ -64,19 +75,19 @@ function updateShelf(lib) {
         bookCard.dataset.index = i;
 
         let bookTitle = document.createElement("span");
-        bookTitle.textContent = book.title;
+        bookTitle.textContent = lib[i].title;
         bookTitle.classList.add("book-title");
 
         let bookAuthor = document.createElement("span");
-        bookAuthor.textContent = book.author;
+        bookAuthor.textContent = lib[i].author;
         bookAuthor.classList.add("book-author");
 
         let bookPages = document.createElement("span");
-        bookPages.textContent = book.pages + " pages";
+        bookPages.textContent = lib[i].pages + " pages";
         bookPages.classList.add("book-pages");
 
         let bookRead = document.createElement("span");
-        bookRead.textContent = book.read ? "Read" : "Not Read";
+        bookRead.textContent = lib[i].read ? "Read" : "Not Read";
         bookRead.classList.add("book-read");
 
         let bookDelete = document.createElement("button");
@@ -84,10 +95,10 @@ function updateShelf(lib) {
         bookDelete.classList.add("book-delete");
         bookDelete.dataset.index = i;
 
-        let bookEdit = document.createElement("button");
-        bookEdit.textContent = "E";
-        bookEdit.classList.add("book-edit");
-        bookEdit.dataset.index = i;
+        let bookToggle = document.createElement("button");
+        bookToggle.textContent = "T";
+        bookToggle.classList.add("book-toggle");
+        bookToggle.dataset.index = i;
 
         shelf.appendChild(bookCard);
         bookCard.appendChild(bookLabel);
@@ -96,25 +107,51 @@ function updateShelf(lib) {
         bookCard.appendChild(bookPages);
         bookCard.appendChild(bookRead);
         bookCard.appendChild(bookDelete);
-        bookCard.appendChild(bookEdit);
+        bookCard.appendChild(bookToggle);
     }
 
     bookCardArr = Array.from(document.querySelectorAll(".book-card"));
     bookDeleteArr = Array.from(document.querySelectorAll(".book-delete"));
-    bookEditArr = Array.from(document.querySelectorAll(".book-edit"));
+    bookToggleArr = Array.from(document.querySelectorAll(".book-toggle"));
     
     for (let i=0; i<bookCardArr.length; i++) {
         bookCardArr[i].addEventListener("mouseover", () => {
             bookDeleteArr[i].style.opacity = "1";
-            bookEditArr[i].style.opacity = "1";
+            bookToggleArr[i].style.opacity = "1";
         });
         bookCardArr[i].addEventListener("mouseleave", () => {
             bookDeleteArr[i].style.opacity = "0";
-            bookEditArr[i].style.opacity = "0";
+            bookToggleArr[i].style.opacity = "0";
         });
         bookDeleteArr[i].addEventListener("click", () => {
             library.splice(i, 1);
             updateShelf(library);
         });
+        bookToggleArr[i].addEventListener("click", () => {
+            lib[i].toggleRead();
+            updateShelf(library);
+        });
     }
+}
+
+function addInfo(lib) {
+    let totalPages = 0;
+    let totalPagesRead = 0;
+    let totalBooksRead = 0;
+
+    for (let i=0; i<library.length; i++) {
+        totalPages += lib[i].pages;
+        totalPagesRead += lib[i].pages * lib[i].read;
+        totalBooksRead += lib[i].read;
+    }
+
+    let infoPages = document.createElement("span");
+    infoPages.textContent = `Pages: ${totalPagesRead} / ${totalPages}`;
+    infoPages.id = "info-pages";
+    navInfo.appendChild(infoPages);
+
+    let infoBooks = document.createElement("span");
+    infoBooks.textContent = `Books: ${totalBooksRead} / ${lib.length}`;
+    infoBooks.id = "info-books";
+    navInfo.appendChild(infoBooks);
 }

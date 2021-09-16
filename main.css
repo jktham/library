@@ -27,9 +27,27 @@ body {
     background-color: var(--nav-bg);
 }
 #nav-title {
+    flex: 0 0 auto;
     margin: 0px 50px;
     font-size: 36px;
     font-weight: bold;
+    color: var(--text);
+}
+#nav-info {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+    height: 100%;
+    margin: 0px 100px;
+}
+#info-pages {
+    margin: 20px;
+    font-size: 16px;
+    color: var(--text);
+}
+#info-books {
+    margin: 20px;
+    font-size: 16px;
     color: var(--text);
 }
 
@@ -44,11 +62,14 @@ body {
     align-content: flex-start;
     flex-wrap: wrap;
     flex: 1;
+    overflow-y: auto;
+    height: calc(100vh - 180px);
     gap: 40px;
     padding: 40px;
     background-color: var(--shelf-bg);
 }
 .book-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -102,12 +123,11 @@ body {
     color: var(--text);
     background-color: var(--delete);
     opacity: 0;
-    transition: opacity 0.1s ease-in-out;
 }
 .book-delete:hover {
     background-color: var(--delete-hover);
 }
-.book-edit {
+.book-toggle {
     position: absolute;
     transform: translate(-110px, -30px);
     width: 45px;
@@ -118,9 +138,8 @@ body {
     color: var(--text);
     background-color: var(--edit);
     opacity: 0;
-    transition: opacity 0.1s ease-in-out;
 }
-.book-edit:hover {
+.book-toggle:hover {
     background-color: var(--edit-hover);
 }
 
