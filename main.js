@@ -11,9 +11,8 @@ const deleteLibraryButton = document.querySelector("#delete-library");
 let bookCardArr = [];
 let bookDeleteArr = [];
 let bookToggleArr = [];
-let library = [];
+let library = getStorage();
 
-getStorage(library);
 updateShelf(library);
 
 inputForm.addEventListener("submit", () => {
@@ -93,12 +92,12 @@ function addCards(lib) {
         bookRead.classList.add("book-read");
 
         let bookDelete = document.createElement("button");
-        bookDelete.textContent = "X";
+        bookDelete.textContent = "✕";
         bookDelete.classList.add("book-delete");
         bookDelete.dataset.index = i;
 
         let bookToggle = document.createElement("button");
-        bookToggle.textContent = "T";
+        bookToggle.textContent = "🗏";
         bookToggle.classList.add("book-toggle");
         bookToggle.dataset.index = i;
 
@@ -160,19 +159,17 @@ function addInfo(lib) {
 
 function setStorage(lib) {
     localStorage.clear();
-    for (let i=0; i<lib.length; i++) {
-        localStorage.setItem(i, JSON.stringify(lib[i]));
-    }
+    localStorage.setItem("books", JSON.stringify(lib));
 }
 
-function getStorage(lib) {
-    for (let i=0; i<localStorage.length; i++) {
-        if (localStorage[i]) {
-            lib[i] = JSON.parse(localStorage.getItem(i));
+function getStorage() {
+    if (localStorage["books"]) {
+        lib = JSON.parse(localStorage.getItem("books"));
+        for (let i=0; i<lib.length; i++) {
             Object.setPrototypeOf(lib[i], Book.prototype);
-        } else {
-            alert("invalid localstorage");
-            updateShelf(library = []);
         }
+    } else {
+        lib = [];
     }
+    return lib;
 }
