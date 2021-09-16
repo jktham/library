@@ -13,6 +13,7 @@ let bookDeleteArr = [];
 let bookToggleArr = [];
 let library = [];
 
+getStorage(library);
 updateShelf(library);
 
 inputForm.addEventListener("submit", () => {
@@ -62,6 +63,7 @@ function updateShelf(lib) {
 
     addCards(lib);
     addInfo(lib);
+    setStorage(lib);
 }
 
 function addCards(lib) {
@@ -154,4 +156,22 @@ function addInfo(lib) {
     infoBooks.textContent = `Books: ${totalBooksRead} / ${lib.length}`;
     infoBooks.id = "info-books";
     navInfo.appendChild(infoBooks);
+}
+
+function setStorage(lib) {
+    localStorage.clear();
+    for (let i=0; i<lib.length; i++) {
+        localStorage.setItem(i, JSON.stringify(lib[i]));
+    }
+}
+
+function getStorage(lib) {
+    for (let i=0; i<localStorage.length; i++) {
+        if (localStorage[i]) {
+            lib[i] = JSON.parse(localStorage.getItem(i));
+        } else {
+            console.log("invalid localstorage");
+            updateShelf(library = []);
+        }
+    }
 }
