@@ -8,6 +8,29 @@ const inputForm = document.querySelector("#input-form");
 const randomBookButton = document.querySelector("#random-book");
 const deleteLibraryButton = document.querySelector("#delete-library");
 
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+// }
+
+// Book.prototype.toggleRead = function () {
+//     this.read = !this.read;
+// }
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    toggleRead() {
+        this.read = !this.read;
+    }
+}
+
 let bookCardArr = [];
 let bookDeleteArr = [];
 let bookToggleArr = [];
@@ -39,17 +62,6 @@ deleteLibraryButton.addEventListener("click", () => {
     library = [];
     updateShelf(library);
 });
-
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
-
-Book.prototype.toggleRead = function () {
-    this.read = !this.read;
-}
 
 function addBook(title, author, pages, read) {
     let book = new Book(title, author, pages, read);
